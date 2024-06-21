@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        margin: 0;
+      }
+
+      #cabecalho {
+        display: flex;
+        flex-direction: row;
+      }
+
+      #lowerheader {
+        padding-left: 10%;
+        display: flex;
+        flex-direction: row;
+      }
+
+      #signhere {
+        position: absolute;
+        right: 0;
+      }
+
+      #hunterhlogo {
+        max-height: 4rem;
+		
+        width: auto;
+      }
+
+      #recrutamento {
+        position: absolute;
+        right: 0;
+      }
+
+      #separator {
+        background-color: #000000;
+        height: 2px;
+        width: 100%;
+      }
+
+      #prestacao {
+        max-width: 40%;
+        position: relative;
+        left: 60%;
+        text-align: justify;
+      }
+
+      #inputspace {
+        width: 45.5%;
+        background-color: #c0c0c0;
+      }
+
+      #infoempresa {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+      }
+
+      .infoempresa {
+        background-color: #d9d9d9;
+        border-bottom: solid #000000 2px;
+      }
+      .infoempresa p {
+        text-align: left;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+      #infolocal,
+      #infocontato,
+      #infopessoal {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      table {
+        width: 100%;
+        border: 0.05rem solid #000000;
+        border-spacing: 0px;
+      }
+
+      table td {
+        border: 0.05rem solid #000000;
+      }
+
+      table .linha0 {
+        border: 0.05rem solid #000000;
+        background-color: #d9d9d9;
+        font-weight: bold;
+      }
+
+      #assinaturas {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 20%;
+        padding-right: 10%;
+      }
+
+      #assinaturas p {
+        border-top: solid 1px #000000;
+        text-align: center;
+      }
+
+      iframe {
+        position: relative;
+        top: 0;
+        left: -15rem;
+        bottom: 0;
+        right: 0;
+        width: 84rem;
+        height: 72rem;
+        border: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        z-index: 999999;
+      }
+    </style>
+    <style>
+      #FPVHeader {
+        display: flex;
+        align-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #corpo {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+      }
+
+      #corpo #titulo {
+        background-color: black;
+        text-align: center;
+        border: dotted black;
+        color: white;
+        margin-bottom: 1%;
+      }
+
+      .FPVcabecalho {
+        background-color: #e6da14;
+        text-align: center;
+        border: solid black 1px;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .FPV footer {
+        display: flex;
+        align-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .FPV table {
+        width: 100%;
+        border: 0.05rem solid #9bbb59;
+        border-spacing: 0px;
+      }
+
+      .FPV table td {
+        border: 0.05rem solid #9bbb59;
+      }
+      .FPV footer {
+        display: flex;
+        align-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <link rel="stylesheet" href="FEC.css" />
+    <link rel="stylesheet" href="FPV.css" />
+    <title>Contrato</title>
+  </head>
+  <body id="documento" onload="main()">
+    <button onclick="CreatePDFfromHTML()">Download as PDF</button>
+    <div id="toprint">
+      <header>
+        <div id="cabecalho">
+          <img id="hunterhlogo" src="./img/logo.png" alt="Logo da HunteRH" />
+          <p id="recrutamento">Recrutamento & Seleção de Executivos</p>
+        </div>
+        <div id="separator"></div>
+        <div id="lowerheader">
+          <p id="PJ">CONTRATO PESSOA JURÍDICA</p>
+          <p id="signhere">________________</p>
+        </div>
+      </header>
+      <div id="prestacao">
+        <p>
+          Contrato de prestação de serviços Recrutamento e Seleção que entre si
+          celebram HunteRH–Executives e
+          <span id="inputspace">__________________</span>
+        </p>
+      </div>
+      <div id="infoempresa"></div>
+      <div>
+        <p>
+          Empresa CONTRATADA: HunteRH – Executives - inscrita perante o CNPJ sob
+          o nº. 33.508.022/0001-16 - Situada à Lagarto, 2260, Salgado Filho,
+          49020-290, Aracaju - SE.
+        </p>
+        <ol>
+          <li>
+            DESCRIÇÃO DO SERVIÇO: serviço de consultoria para RECRUTAMENTO E
+            SELEÇÃO DE EXECUTIVO(S), de acordo com perfil descrito do ANEXO I.
+          </li>
+          <li>
+            APRESENTAÇÃO DOS CANDIDATOS: A HunteRH – Executives se obriga a
+            apresentar de 3 a 5 profissionais finalistas até que o cliente
+            aceite ou contrate um dentre eles, desde que não haja mudanças no
+            perfil descrito do ANEXO I que caracterizem um novo recrutamento.
+          </li>
+          <li>
+            EXCLUSIVIDADE: A partir do momento da assinatura deste contrato a
+            HunteRH – Executives detem a exclusividade de busca do profissional,
+            de acordo com perfil descrito do ANEXO I, até o encerramento deste
+            processo seletivo, que se dará com a contratação de um dos
+            candidatos apresentados. 3.1 A CONTRATADA fará jus ao valor integral
+            descrito na cláusula 9 deste instrumento contratual, caso a vaga
+            seja ocupada por um candidato proveniente de outra consultoria,
+            processo realizado internamente pela empresa por seleção, promoção
+            ou indicação, ou por qualquer outro meio, durante o prazo estipulado
+            de duração deste processo.
+          </li>
+          <li>
+            PRAZO PARA ENTREVISTAS: O cliente se compromete a entrevistar os
+            candidatos apresentados pela HunteRH – Executives em até 5 dias
+            úteis após a apresentação.
+          </li>
+          <li>
+            GARANTIA: Ocorrendo o desligamento do profissional contratado, a
+            HunteRH – Executives fornece garantia de 03 meses, para (01) uma
+            reposição, contados a partir da data de contratação do candidato
+            escolhido, sem custos de honorários, exceto despesas de viagem, se
+            necessário. 5.1. O perfil não poderá ser diferente do já alinhado
+            nos ANEXOS I e II.
+          </li>
+          <li>
+            REAJUSTE DE CONTRATO: Caso o salário da Vaga seja alterado, o valor
+            do contrato será reajustado de acordo com a nova remuneração do
+            candidato efetivamente contratado, não devendo ser inferior ao
+            salário mensal estimado apontado no ANEXO I deste instrumento de
+            contrato, nem inferior ao valor previamente contratado.
+          </li>
+          <li>
+            NÃO ABORDAGEM A COLABORADORES: Durante o período de 18 meses a
+            partir da assinatura do último contrato firmado entre as partes, a
+            HunteRH – Executives se compromete a não abordar qualquer
+            colaborador do contratante para participação em processos seletivos.
+          </li>
+          <li>
+            CANCELAMENTO DE CONTRATO: No caso de cancelamento do contrato por
+            parte da CONTRATANTE, serão cobrados os valores proporcionais aos
+            serviços prestados, mediante apresentação de um relatório de
+            atividades desenvolvidas, respeitadas os percentuais abaixo:
+
+            <table id="tabelapercentual">
+              <thead>
+                <td>Etapas</td>
+                <td>Percentual devido do contrato (%)</td>
+              </thead>
+              <tr>
+                <td>Após Assinatura da contratante</td>
+                <td>25%</td>
+              </tr>
+              <tr>
+                <td>Após divulgação pública da vaga</td>
+                <td>50%</td>
+              </tr>
+              <tr>
+                <td>Após Assinatura da contratante</td>
+                <td>70%</td>
+              </tr>
+              <tr>
+                <td>Após Assinatura da contratante</td>
+                <td>90%</td>
+              </tr>
+              <tr>
+                <td>Após Assinatura da contratante</td>
+                <td>100%</td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            INVESTIMENTO: O valor pelos serviços prestados descrito neste
+            contrato será equivalente um salário do profissional contratado
+            acrescido de impostos (16,33%)
+
+            <table id="tablecargo"></table>
+            *Valor letiável a depender do salário ajustado entre as partes.
+            <br />9.1 O valor mínimo salarial para esta vaga não poderá ser
+            inferior a
+            <span id="valorminimo">__________</span>
+          </li>
+          <li>PRAZO DE ENTREGA: 21 dias úteis</li>
+          <li>
+            <table>
+              <tr class="linha0">
+                Forma de Pagamento:
+              </tr>
+            </table>
+            *Pagamentos em cartão de crédito sofrerão acréscimos das taxas
+            cobradas pela operadora
+          </li>
+          <li>
+            VIGÊNCIA DO CONTRATO: o presente contrato é válido até a aprovação
+            do(s) candidato(s), que deverá ser feita até 15 dias após aprovação
+            dos candidatos.
+          </li>
+          <li>
+            AVISO DE CONTRATAÇÃO: a CONTRATANTE se compromete a comunicar a
+            Consultoria quando da escolha de seu candidato. O não cumprimento
+            desta comunicação em um prazo de até 15 dias após a apresentação do
+            relatório ficará subentendido como Contratação Realizada com Sucesso
+            e não comunicada, fazendo a CONTRATADA jus ao valor restante
+            ajustado na cláusula 12.
+          </li>
+          <li>
+            SUCESSO IMPLICITO: Nos casos em que o cliente não entrevistar os
+            candidatos apresentados pela HunteRH no prazo estabelecido na
+            Cláusula 4 por motivos injustificados ou se o mesmo deixar de se
+            comunicar injustificadamente com a consultoria, ficará subentendido
+            como Seleção Realizada com Sucesso e não comunicada, fazendo, assim,
+            a contratada, jus à parcela segunda parcela imediatamente.
+          </li>
+          <li>
+            FÓRUM: Fica eleito o fórum da Comarca de Aracaju/SE para dirimir
+            dúvidas relativas ao presente contrato.
+          </li>
+          <li></li>
+          <li>
+            FÓRUM: Fica eleito o fórum da Comarca de Aracaju/SE para dirimir
+            dúvidas relativas ao presente contrato.
+          </li>
+        </ol>
+      </div>
+      <p id="date">Aracaju/SE</p>
+      <div id="assinaturas">
+        <p>Autorizo a execução deste serviço</p>
+        <p>Ione Maria Santos de Araújo<br />HunteRH – Executives</p>
+      </div>
+      <footer><div></div></footer>
+    </div>
+    <div id="iframediv"></div>
+    <div id="fpvfecdiv"></div>
+    <script src="contrato.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://html2canvas.hertzen.com/dist/html2canvas.js"
+    ></script>
+    <script>
+      function CreatePDFfromHTML() {
+        const loopnumber = Number(sessionStorage.getItem("FPVcounter"));
+        sessionStorage.setItem("FECcounter", 0);
+        sessionStorage.setItem("FPVcounter", 0);
+
+        let HTML_Width = 200 * 1.5;
+        let HTML_Height = $("#toprint").height();
+        let top_left_margin = 5;
+        let PDF_Width = 210 * 1.5;
+        let PDF_Height = HTML_Height + 30;
+        let canvas_image_width = HTML_Width;
+        let canvas_image_height = HTML_Height;
+
+        for (let i = 0; i < loopnumber * 2; i++) {
+          document
+            .getElementById("toprint")
+            .appendChild(
+              document
+                .getElementById(`iframe${i}`)
+                .contentWindow.document.getElementById("bodyexport")
+            );
+        }
+        //let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 2;
+        let pdf = new jsPDF("p", "pt", [PDF_Width, PDF_Height]);
+        html2canvas($("#toprint")[0])
+          .then(function (canvas) {
+            let imgData = canvas.toDataURL("image/png", 1.0);
+            pdf.addImage(
+              imgData,
+              "PNG",
+              top_left_margin,
+              top_left_margin,
+              canvas_image_width,
+              canvas_image_height
+            );
+            /*for (let i = 1; i <= totalPDFPages; i++) {
+              pdf.addPage(PDF_Width, PDF_Height);
+              pdf.addImage(
+                imgData,
+                "PNG",
+                top_left_margin,
+                -(PDF_Height * i) + top_left_margin * 4,
+                canvas_image_width,
+                canvas_image_height
+              );
+            }*/
+
+            //$(".html-content").hide();
+          })
+          .then(function pdfSave() {
+            return pdf.save("contrato.pdf");
+          });
+      }
+    </script>
+  </body>
+</html>
