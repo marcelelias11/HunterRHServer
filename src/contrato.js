@@ -1,126 +1,23 @@
-function main() {
-  sessionStorage.setItem("FECcounter", 0);
-  sessionStorage.setItem("FPVcounter", 0);
-}
+let i = 1;
 
-document.getElementById("date").innerHTML +=
-  " " +
-  new Date().getDate() +
-  "/" +
-  ("0" + (new Date().getMonth() + 1)).slice(-2) +
-  "/" +
-  new Date().getFullYear();
-fetch("http://localhost:8080/contrato")
+for (i; i < 4; i++) {
+  document.getElementById(
+    "iframediv"
+  ).innerHTML += `<iframe id="iframe${i}" src="contrato${i}.html" title="contrato${i}"></iframe>`;
+}
+fetch("/dados")
   .then(async function (response) {
     return await response.json();
   })
   .then(async function (text) {
-    let cadastrojsonarr = text.cadastro;
-    let contratojsonarr = text.contratos;
-    let valueimposto = text.imposto;
+    sessionStorage.setItem("cadastro", JSON.stringify(text.cadastro));
+    sessionStorage.setItem("contrato", JSON.stringify(text.contratos));
+    sessionStorage.setItem("imposto", text.valueimposto);
+    sessionStorage.setItem("formapagamento", text.formapagamento);
+    sessionStorage.setItem("FPVs", JSON.stringify(text.FPVs));
+    sessionStorage.setItem("FECs", JSON.stringify(text.FECs));
 
-    let cadastroarr = [
-      cadastrojsonarr.find((p) => p.title === "Empresa"),
-      cadastrojsonarr.find((p) => p.title === "CNPJ"),
-      cadastrojsonarr.find((p) => p.title === "Endereço"),
-      cadastrojsonarr.find((p) => p.title === "Bairro"),
-      cadastrojsonarr.find((p) => p.title === "CEP"),
-      cadastrojsonarr.find((p) => p.title === "Cidade"),
-      cadastrojsonarr.find((p) => p.title === "Estado"),
-      cadastrojsonarr.find((p) => p.title === "Telefone"),
-      cadastrojsonarr.find((p) => p.title === "E-mail"),
-      cadastrojsonarr.find((p) => p.title === "Responsável legal"),
-      cadastrojsonarr.find((p) => p.title === "CPF"),
-      cadastrojsonarr.find((p) => p.title === "Cargo"),
-    ];
-    let cadastrosection = "";
-    for (let i = 0; i < cadastroarr.length - 1; i++) {
-      switch (cadastroarr[i].title) {
-        case "Bairro":
-          cadastrosection += `<section id="infolocal" class="infoempresa">`;
-          for (let j = i; j < i + 4; j++) {
-            cadastrosection += `<p>${cadastroarr[j].title}: ${cadastroarr[j].info}</p>`;
-          }
-          cadastrosection += `</section>`;
-          i = i + 3;
-          break;
-
-        case "Telefone":
-          cadastrosection += `<section id="infocontato" class="infoempresa">`;
-          for (let j = i; j < i + 2; j++) {
-            cadastrosection += `<p>${cadastroarr[j].title}: ${cadastroarr[j].info}</p>`;
-          }
-          cadastrosection += `</section>`;
-          i = i + 1;
-          break;
-
-        case "CPF":
-          cadastrosection += `<section id="infopessoal" class="infoempresa">`;
-          for (let j = i; j < i + 2; j++) {
-            cadastrosection += `<p>${cadastroarr[j].title}: ${cadastroarr[j].info}</p>`;
-          }
-          cadastrosection += `</section>`;
-          break;
-        case "Empresa":
-          cadastrosection += `<section class="infoempresa">`;
-          cadastrosection += `<p>${cadastroarr[i].title} CONTRATADA: ${cadastroarr[i].info}</p>`;
-          cadastrosection += `</section>`;
-          break;
-        default:
-          cadastrosection += `<section class="infoempresa">`;
-          cadastrosection += `<p>${cadastroarr[i].title}: ${cadastroarr[i].info}</p>`;
-          cadastrosection += `</section>`;
-          break;
-      }
-    }
-    document.getElementById("infoempresa").innerHTML += cadastrosection;
-
-    document.getElementById("inputspace").innerText = cadastroarr[0].info;
-    function valortotalsum() {
-      let sum = 0;
-      for (const key in contratojsonarr) {
-        sum +=
-          Number(contratojsonarr[key][1].info) *
-          Number(contratojsonarr[key][2].info);
-      }
-      return sum;
-    }
-
-    let ttext = "";
-
-    ttext += '<tr class = "linha0">';
-    ttext += `<td>Nome da Vaga</td>`;
-    ttext += `<td>Qtde.</td>`;
-    ttext += `<td>Valor (R$)</td>`;
-    ttext += "</tr>";
-
-    for (const key in contratojsonarr) {
-      ttext += "<tr>";
-      for (let i = 0; i < contratojsonarr[key].length; i++) {
-        ttext += `<td>${contratojsonarr[key][i].info.replace(".", ",")}</td>`;
-      }
-      ttext += "</tr>";
-    }
-
-    ttext += "<tr>";
-    ttext += `<td>Imposto</td>`;
-    ttext += `<td>${String(valueimposto * 100).replace(".", ",")}%</td>`;
-    ttext += `<td>${String(valortotalsum() * valueimposto).replace(
-      ".",
-      ","
-    )}</td>`;
-    ttext += "</tr>";
-
-    ttext += '<tr class = "linha0">';
-    ttext += `<td>TOTAL</td>`;
-    ttext += `<td>-</td>`;
-    ttext += `<td>${String(
-      valortotalsum() + valortotalsum() * valueimposto
-    ).replace(".", ",")}</td>`;
-    ttext += "</tr>";
-    document.getElementById("tablecargo").innerHTML += ttext;
-    let i = 0;
-    for (const key in contratojsonarr) {
+    for (const key in JSON.parse(sessionStorage.getItem("contrato"))) {
       document.getElementById(
         "iframediv"
       ).innerHTML += `<iframe id="iframe${i}" src="FPV.html" title="FPV"></iframe>`;
@@ -134,3 +31,39 @@ fetch("http://localhost:8080/contrato")
   .catch((error) => {
     console.error(error);
   });
+
+fetch("/sign")
+  .then(async function (response) {
+    return await response.json();
+  })
+  .then(async function (text) {
+    sessionStorage.setItem("assinatura", text.assinatura);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+console.log(i);
+
+sessionStorage.setItem("counter", String(i));
+
+sessionStorage.setItem("FECcounter", 0);
+
+function changepage() {
+  const loop =
+    Number(sessionStorage.getItem("counter")) +
+    Number(sessionStorage.getItem("FPVcounter")) +
+    Number(sessionStorage.getItem("FECcounter"));
+  for (let i = 0; i < loop - 1; i++) {
+    let iframediv = document.createElement("div");
+    iframediv.appendChild(
+      document
+        .getElementById(`iframe${i + 1}`)
+        .contentWindow.document.getElementById("bodyexport")
+    );
+    document.getElementById("toprint").appendChild(iframediv);
+  }
+  document.getElementById("iframediv").remove();
+}
+
+setTimeout(changepage, 10000);
